@@ -17,6 +17,24 @@ void inOrderTraversal(struct Node *root) {
     inOrderTraversal(root->right);
 }
 
+void preOrderTraversal(struct Node *root) {
+    if (root == NULL) {
+        return;
+    }
+    std::cout << root->value << std::endl;
+    inOrderTraversal(root->left);
+    inOrderTraversal(root->right);
+}
+
+void postOrderTraversal(struct Node *root) {
+    if (root == NULL) {
+        return;
+    }
+    inOrderTraversal(root->left);
+    inOrderTraversal(root->right);
+    std::cout << root->value << std::endl;
+}
+
 struct Node *insertNode(struct Node *root, int item) {
     if (root == NULL) {
         root = new struct Node;
@@ -35,10 +53,11 @@ struct Node *insertNode(struct Node *root, int item) {
 int main() {
     struct Node *head = NULL;
     head = insertNode(head, 4);
-    insertNode(head, 43);
+    insertNode(head, 3);
     insertNode(head, 23);
     insertNode(head, 12);
     insertNode(head, 443);
     insertNode(head, 424);
-    inOrderTraversal(head);
+
+    postOrderTraversal(head);
 }
