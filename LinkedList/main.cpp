@@ -1,6 +1,6 @@
 #include <format>
 #include <iostream>
-
+#include "string"
 
 struct Node {
     int value;
@@ -61,6 +61,17 @@ struct Node *reverseOperation(struct Node *head) {
     }
     head = prev;
     return head;
+}
+
+
+int binaryToDecimal(struct Node *head) {
+    std::string binaryNumber = "";
+    while (head != NULL) {
+        binaryNumber += std::to_string(head->value);
+        head = head->next;
+    }
+    int binaryNumberAsInt = std::stoi(binaryNumber, nullptr, 2);
+    return binaryNumberAsInt;
 }
 
 
