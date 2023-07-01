@@ -35,7 +35,7 @@ void postOrderTraversal(struct Node *root) {
     std::cout << root->value << std::endl;
 }
 
-struct Node *insertNode(struct Node *root, int item) {
+struct Node* insertNode(struct Node *root, int item) {
     if (root == NULL) {
         root = new struct Node;
         root->left = root->right = NULL;
@@ -50,14 +50,26 @@ struct Node *insertNode(struct Node *root, int item) {
     return root;
 }
 
-int main() {
-    struct Node *head = NULL;
-    head = insertNode(head, 4);
-    insertNode(head, 3);
-    insertNode(head, 23);
-    insertNode(head, 12);
-    insertNode(head, 443);
-    insertNode(head, 424);
+struct Node* search(struct Node* root, int key){
+    if (root == NULL || root->value == key){
+        return root;
+    }
+    if (root->value > key){
+        return search(root->left, key);
+    }
+    return search(root->right, key);
+}
 
-    postOrderTraversal(head);
+int main() {
+    struct Node *root = NULL;
+    root = insertNode(root, 4);
+    insertNode(root, 3);
+    insertNode(root, 23);
+    insertNode(root, 12);
+    insertNode(root, 443);
+    insertNode(root, 424);
+
+    struct Node* searchedNode;
+    searchedNode = search(root, 424);
+    std::cout << searchedNode->value;
 }
