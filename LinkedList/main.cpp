@@ -32,20 +32,27 @@ void searchOperation(struct Node *head, int searchItem) {
 
 
 void printOperation(struct Node *head) {
-    while (head->next != NULL) {
+    while (head != NULL) {
         std::cout << head->value << std::endl;
         head = head->next;
     }
 }
 
-void deleteOperation(struct Node *head, int itemTBDeleted) {
-    while (head->next != NULL) {
-        if (head->next->value == itemTBDeleted) {
-            head->next = head->next->next;
-            break;
-        }
+struct Node *deleteOperation(struct Node *head, int itemTBDeleted) {
+    struct Node *tail = head;
+    while (head != NULL && head->value == itemTBDeleted) {
         head = head->next;
     }
+    while (tail != NULL) {
+        struct Node *nextNode;
+        nextNode = tail->next;
+        if (nextNode != NULL && nextNode->value == itemTBDeleted) {
+            tail->next = nextNode->next;
+        }else{
+            tail = tail->next;
+        }
+    }
+    return head;
 }
 
 
@@ -61,6 +68,20 @@ struct Node *reverseOperation(struct Node *head) {
     }
     head = prev;
     return head;
+}
+
+void insertOperation(struct Node *head, int i) {
+    struct Node *tempPtr = new Node;
+    struct Node *last = head;
+    tempPtr->value = i;
+    while (last != NULL) {
+        if (last->next == NULL) {
+            last->next = tempPtr;
+            break;
+        }
+        last = last->next;
+    }
+    head = last;
 }
 
 
